@@ -1,4 +1,4 @@
-import mongoose, { userSchema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const teamSchema = new Schema(
   {
@@ -14,6 +14,7 @@ const teamSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    projectTeams: [{ type: Schema.Types.ObjectId, ref: "ProjectTeam" }],
     users: [
       {
         type: Schema.Types.ObjectId,

@@ -7,6 +7,7 @@ const projectSchema = new Schema(
     startDate: Date,
     endDate: Date,
     tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
+    projectTeams: [{ type: Schema.Types.ObjectId, ref: "ProjectTeam" }],
   },
   { timestamps: true }
 );

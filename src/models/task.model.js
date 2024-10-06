@@ -12,6 +12,9 @@ const taskSchema = new Schema({
   projectId: { type: Schema.Types.ObjectId, ref: "Project", required: true },
   authorUserId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   assignedUserId: { type: Schema.Types.ObjectId, ref: "User" },
+  taskAssignments: [{ type: Schema.Types.ObjectId, ref: "TaskAssignment" }],
+  attachments: [{ type: Schema.Types.ObjectId, ref: "Attachment" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 export const Task = mongoose.model("Task", taskSchema);
