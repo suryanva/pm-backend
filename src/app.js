@@ -5,33 +5,32 @@
 
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import morgan from "morgan";
+import bodyParser from "body-parser";
 
 const app = express();
-/**ap * Middleware to enable Cross-Origin Resource Sharing (CORS). * Allows requests from the specified origin and includes credentials.re * @see {@link https://expressjs.com/en/resources/middleware/cors.html|cors} */ app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
-    credentials: true,
-  })
-);
-/** * Middleware to parse incoming JSON requests. * Limits the request body size to 16kb. * @see {@link https://expressjs.com/en/api.html#express.json|express.json} */
-app.use(express.json({ limit: "16kb" }));
-/** * Middleware to parse incoming URL-encoded requests.
- * Limits the request body size to 16kb.
- * @see {@link https://expressjs.com/en/api.html#express.urlencoded|express.urlencoded}
- */
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(morgan("common"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
-/**
- * Middleware to serve static files from the "public" directory.
- * @see {@link https://expressjs.com/en/starter/static-files.html|express.static}
- */
-app.use(express.static("public"));
+// Home Route
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to the Project Management API",
+  });
+});
 
-/**
- * Middleware to parse cookies attached to the client request object.
- * @see {@link https://expressjs.com/en/resources/middleware/cookie-parser.html|cookie-parser}
- */
-app.use(cookieParser());
+// Routes for the application
+
+import projectRoutes from "./routes/project.routes.js";
+
+// Mounting the user routes
+
+app.use("/api/v1/projects", projectRoutes);
 
 export default app;

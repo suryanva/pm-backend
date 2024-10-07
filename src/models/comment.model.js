@@ -6,4 +6,6 @@ const commentSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-export const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
+
+export default Comment;

@@ -5,7 +5,6 @@ const taskAssignmentSchema = new Schema({
   taskId: { type: Schema.Types.ObjectId, ref: "Task", required: true },
 });
 
-export const TaskAssignment = mongoose.model(
-  "TaskAssignment",
-  taskAssignmentSchema
-);
+const TaskAssignment = mongoose.model("TaskAssignment", taskAssignmentSchema);
+
+export default TaskAssignment;

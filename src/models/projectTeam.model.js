@@ -5,4 +5,6 @@ const projectTeamSchema = new Schema({
   projectId: { type: Schema.Types.ObjectId, ref: "Project", required: true },
 });
 
-export const ProjectTeam = mongoose.model("ProjectTeam", projectTeamSchema);
+const ProjectTeam = mongoose.model("ProjectTeam", projectTeamSchema);
+
+export default ProjectTeam;

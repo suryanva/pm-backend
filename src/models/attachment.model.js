@@ -7,4 +7,6 @@ const attachmentSchema = new Schema({
   uploadedById: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-export const Attachment = mongoose.model("Attachment", attachmentSchema);
+const Attachment = mongoose.model("Attachment", attachmentSchema);
+
+export default Attachment;
