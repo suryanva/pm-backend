@@ -10,7 +10,32 @@ const getAllProjects = asyncHandler(async (req, res) => {
     throw new ApiError(404, "No projects found");
   }
 
-  res.status(200).json(new ApiResponse(200, existingProjects));
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, existingProjects, "Projects fetched successfully")
+    );
 });
 
-export { getAllProjects };
+const createProject = asyncHandler(async (req, res) => {
+  const { name, description, startDate, endDate } = req.body;
+
+  if (!name) {
+    throw new ApiError(400, "Project name is required");
+  }
+
+  const project = new Project({
+    name,
+    description,
+    startDate,
+    endDate,
+  });
+
+  const newProject = await project.save();
+
+  res
+    .status(201)
+    .json(new ApiResponse(201, newProject, "Project created successfully"));
+});
+
+export { getAllProjects, createProject };
